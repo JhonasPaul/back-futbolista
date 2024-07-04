@@ -38,18 +38,6 @@ public class FutbolistaServiceImpl implements IFutbolistaService {
 	}
 
 	@Override
-	@Transactional
-	public Futbolista save(Futbolista usuario) {
-		return futbolistaRepository.save(usuario);
-	}
-
-	@Override
-	@Transactional
-	public void delete(Long id) {
-		futbolistaRepository.deleteById(id);
-	}
-
-	@Override
 	@Transactional(readOnly = true)
 	public List<Posicion> listarPosiciones() {
 		return futbolistaRepository.findAllPosiciones();

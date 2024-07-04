@@ -15,10 +15,6 @@ public interface IFutbolistaService {
 	public Page<Futbolista> findAll(Pageable pageable);
 	
 	public Futbolista findById(Long id);
-	
-	public Futbolista save(Futbolista futbolista);
-	
-	public void delete(Long id);
 
 	List<Posicion>listarPosiciones();
 

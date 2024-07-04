@@ -40,23 +40,8 @@ public class FutbolistaController {
 	
 	@GetMapping("/futbolistas/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
-		
 		Futbolista futbolista = null;
 		Map<String, Object> response = new HashMap<>();
-		
-		try {
-			futbolista = futbolistaService.findById(id);
-		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar la consulta en la base de datos");
-			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		
-		if(futbolista == null) {
-			response.put("mensaje", "El futbolista ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
-			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
-		}
-		
 		return new ResponseEntity<Futbolista>(futbolista, HttpStatus.OK);
 	}
 
