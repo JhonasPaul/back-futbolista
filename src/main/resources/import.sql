@@ -1,24 +1,16 @@
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Andrés', 'Guzmán', '2018-01-01', 'profesor@bolsadeideas.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Mr. John', 'Doe', '2018-01-02','john.doe@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Linus', 'Torvalds', '2018-01-03','linus.torvalds@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Rasmus', 'Lerdorf', '2018-01-04', 'rasmus.lerdorf@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Erich', 'Gamma', '2018-02-01', 'erich.gamma@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Richard', 'Helm', '2018-01-04', 'richard.helm@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Ralph', 'Johnson', '2018-02-18', 'ralph.johnson@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('John', 'Vlissides', '2018-02-28', 'john.vlissides@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Dr. James', 'Gosling', '2018-02-28', 'james.gosling@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Magma', 'Lee', '2018-03-04', 'magma.lee@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Tornado', 'Roe', '2018-03-05', 'tornado.roe@gmail.com');
-INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas)
-VALUES ('Jade', 'Doe', '2018-03-06', 'jane.doe@gmail.com');
+INSERT INTO posiciones (posicion) VALUES ('delantero');
+INSERT INTO posiciones (posicion) VALUES ('medio campista');
+INSERT INTO posiciones (posicion) VALUES ('defensa');
+
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Andrés', 'Guzmán', '2018-01-01', 'velocidad', 1);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Mr. John', 'Doe', '2018-01-02','fuerza',2);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Linus', 'Torvalds', '2018-01-03','inteligencia',3);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Rasmus', 'Lerdorf', '2018-01-04', 'velocidad',1);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Erich', 'Gamma', '2018-02-01', 'fuerza',2);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Richard', 'Helm', '2018-01-04', 'inteligencia',3);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Ralph', 'Johnson', '2018-02-18', 'fuerza',1);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('John', 'Vlissides', '2018-02-28', 'condunccion',2);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Dr. James', 'Gosling', '2018-02-28', 'lider',3);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Magma', 'Lee', '2018-03-04', 'veloz',1);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Tornado', 'Roe', '2018-03-05', 'fuerza',2);
+INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Jade', 'Doe', '2018-03-06', 'inteligencia',3);

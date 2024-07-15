@@ -1,21 +1,19 @@
 package com.ortiz.jonathan.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+@MappedSuperclass
 @Getter
 @Setter
-@Entity
-@Table(name = "posiciones")
-public class Posicion {
+public class Persona {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String posicion;
-
-    public Posicion() {
-    }
+    protected Long id;
+    protected String nombres;
+    protected String apellidos;
+    protected String fechaNacimiento;
 
 }
