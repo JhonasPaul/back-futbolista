@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "posiciones")
-public class Posicion {
-    @Id
+public class Posicion extends BaseId{
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id;*/
     private String posicion;
 
     public Posicion() {

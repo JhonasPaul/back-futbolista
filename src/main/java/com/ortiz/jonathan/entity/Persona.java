@@ -7,11 +7,8 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public class Persona {
+public class Persona extends BaseId{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
     protected String nombres;
     protected String apellidos;
     protected String fechaNacimiento;
