@@ -32,8 +32,8 @@ public class FutbolistaController {
 
 
     @GetMapping("/page/{page}")
-    public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Pageable page, int pageName) {
-        Pageable pageable = PageRequest.of(pageName, 10);
+    public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
         return new ResponseEntity<>(service.paginate(pageable),HttpStatus.OK);
     }
 }
