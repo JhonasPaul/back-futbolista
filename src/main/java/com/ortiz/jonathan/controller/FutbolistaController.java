@@ -26,19 +26,19 @@ public class FutbolistaController {
 
     private final FutbolsitaService service;
 
-    private FutbolistaController(FutbolsitaService service) {
+    protected FutbolistaController(FutbolsitaService service) {
         this.service = service;
     }
 
 
     @GetMapping("/page/{page}")
-    public Page<Futbolista> getAll(@PathVariable Integer page) {
-       Pageable  pageable = PageRequest.of(page, 6);
-        return service.paginate(pageable);
+    public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Integer page) {
+        Pageable pageable = PageRequest.of(page, 10);
+        return new ResponseEntity<>(service.paginate(pageable),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Futbolista> getById(@PathVariable Long id) {
+    public ResponseEntity<Futbolista> getFutbolista(@PathVariable Long id) {
         return new ResponseEntity<>(service.listarFutbolistaPorId(id), HttpStatus.OK);
     }
 }
