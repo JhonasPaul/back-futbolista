@@ -14,3 +14,6 @@ INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, 
 INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Magma', 'Lee', '2018-03-04', 'veloz',1);
 INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Tornado', 'Roe', '2018-03-05', 'fuerza',2);
 INSERT INTO futbolistas (nombres, apellidos, fecha_nacimiento, caracteristicas, posicion_id) VALUES ('Jade', 'Doe', '2018-03-06', 'inteligencia',3);
+
+
+

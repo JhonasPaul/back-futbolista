@@ -19,38 +19,12 @@ import java.util.Optional;
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/posiciones")
-public class PosicionController extends BaseControllerImpl<Posicion, PosicionServiceImpl> {
+public class PosicionController {
 
-    private final PosicionServiceImpl service;
+    private final PosicionService service;
 
-    public PosicionController(PosicionServiceImpl service) {
-        super(service);
+    public PosicionController(PosicionService service) {
         this.service = service;
     }
-
-    @Override
-    public ResponseEntity<?> getAll() {
-        List<Posicion> listar = service.findAll();
-        return new ResponseEntity<>(listar, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> getOne(Long id) {
-        Optional<Posicion> posicionId = service.findById(id);
-        return new ResponseEntity<>(posicionId, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> save(Posicion entity) {
-        Posicion guardar = service.save(entity);
-        return new ResponseEntity<>(guardar, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> getPosiciones() {
-        return null;
-    }
-
-
 
 }
