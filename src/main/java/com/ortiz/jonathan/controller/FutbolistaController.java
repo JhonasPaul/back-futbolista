@@ -36,5 +36,10 @@ public class FutbolistaController {
         Pageable pageable = PageRequest.of(page, 10);
         return new ResponseEntity<>(service.paginate(pageable),HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Futbolista> getFutbolista(@PathVariable Long id) {
+        return new ResponseEntity<Futbolista>(service.listarFutbolistaPorId(id),HttpStatus.OK);
+    }
 }
 
