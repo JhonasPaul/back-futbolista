@@ -21,45 +21,20 @@ import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("/futbolistas")
-public class FutbolistaController extends BaseControllerImpl<Futbolista, FutbolistaServiceImpl> {
+@RequestMapping("/api/futbolistas")
+public class FutbolistaController {
 
-    private final FutbolistaServiceImpl service;
+    private final FutbolsitaService service;
 
-    protected FutbolistaController(FutbolistaServiceImpl service) {
-        super(service);
+    protected FutbolistaController(FutbolsitaService service) {
         this.service = service;
     }
 
 
-    @Override
-    public ResponseEntity<?> getAll() {
-        List<Futbolista> lista = service.findAll();
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+    @GetMapping("/page/{page}")
+    public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Pageable page, int pageName) {
+        Pageable pageable = PageRequest.of(pageName, 10);
+        return new ResponseEntity<>(service.paginate(pageable),HttpStatus.OK);
     }
-
-    @Override
-    public ResponseEntity<?> getOne(Long id) {
-        Optional<Futbolista> futbolistaPorId = service.findById(id);
-        return new ResponseEntity<>(futbolistaPorId, HttpStatus.OK);
-    }
-
-
-    @Override
-    public ResponseEntity<?> getPosiciones() {
-        Posicion posicion = new Posicion();
-        return new ResponseEntity<Posicion>(posicion, HttpStatus.OK);
-    }
-
-
-    public Page<Futbolista> getAll(@PathVariable Integer page, Pageable pageable) {
-         pageable = PageRequest.of(page, 6);
-        return service.findAll(pageable);
-    }
-
-    /*@Override
-    public Page<Futbolista> getAll(Pageable pageable) {
-        return service.findAll(pageable);
-    }*/
 }
 
