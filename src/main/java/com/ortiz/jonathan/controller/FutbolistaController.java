@@ -3,6 +3,7 @@ package com.ortiz.jonathan.controller;
 
 import com.ortiz.jonathan.entity.Futbolista;
 import com.ortiz.jonathan.entity.Posicion;
+import com.ortiz.jonathan.entity.dtos.FutbolistaDto;
 import com.ortiz.jonathan.service.FutbolistaServiceImpl;
 import com.ortiz.jonathan.service.FutbolsitaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class FutbolistaController {
 
 
     @GetMapping("/page/{page}")
-    public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Integer page) {
+    public ResponseEntity<Page<FutbolistaDto>> getFutbolistas(@PathVariable Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
         return new ResponseEntity<>(service.paginate(pageable),HttpStatus.OK);
     }
