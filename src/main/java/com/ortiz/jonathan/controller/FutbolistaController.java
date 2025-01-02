@@ -41,5 +41,10 @@ public class FutbolistaController {
     public ResponseEntity<Futbolista> getFutbolista(@PathVariable Long id) {
         return new ResponseEntity<>(service.listarFutbolistaPorId(id), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteFutbolista(@PathVariable Long id) {
+      service.eliminarFutbolista(id);
+    }
 }
 

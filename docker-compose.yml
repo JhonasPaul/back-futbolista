@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  app:
+    networks:
+      - spring
+    build:
+      context: .
+    image: jhonaspaul/futbolistas:latest
+    container_name: servicio-futbolistas
+    ports:
+      - "8001:8080"
+    depends_on:
+      - db
+  db:
+    networks:
+      - spring
+    container_name: mysql8
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: 45549813O
+      MYSQL_DATABASE: "futbolistas_db"
+    ports:
+      - "3306:3306"
+networks:
+  spring:
+    driver: bridge

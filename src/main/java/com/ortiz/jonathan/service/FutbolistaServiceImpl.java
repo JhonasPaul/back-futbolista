@@ -26,4 +26,9 @@ public class FutbolistaServiceImpl implements   FutbolsitaService{
 	public Futbolista listarFutbolistaPorId(Long id) {
 		return futbolistaRepository.findById(id).orElse(null);
 	}
+
+	@Override
+	public void eliminarFutbolista(Long id) {
+		futbolistaRepository.deleteById(id);
+	}
 }

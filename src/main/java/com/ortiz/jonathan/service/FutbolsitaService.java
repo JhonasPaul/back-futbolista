@@ -12,4 +12,6 @@ public interface FutbolsitaService {
     Page<Futbolista>paginate(Pageable pageable);
 
     Futbolista listarFutbolistaPorId(Long id);
+
+    void eliminarFutbolista(Long id);
 }
