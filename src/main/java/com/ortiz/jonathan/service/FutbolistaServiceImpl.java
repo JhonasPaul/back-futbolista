@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class FutbolistaServiceImpl implements   FutbolsitaService{
@@ -15,6 +17,11 @@ public class FutbolistaServiceImpl implements   FutbolsitaService{
 
 	public FutbolistaServiceImpl(FutbolistaRepository futbolistaRepository) {
 		this.futbolistaRepository = futbolistaRepository;
+	}
+
+	@Override
+	public List<Futbolista> findAll() {
+		return futbolistaRepository.findAll();
 	}
 
 	@Override

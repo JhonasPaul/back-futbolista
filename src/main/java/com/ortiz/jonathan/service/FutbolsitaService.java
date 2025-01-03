@@ -9,6 +9,8 @@ import java.util.List;
 
 
 public interface FutbolsitaService {
+
+     List<Futbolista> findAll();
     Page<Futbolista>paginate(Pageable pageable);
 
     Futbolista listarFutbolistaPorId(Long id);

@@ -31,6 +31,13 @@ public class FutbolistaController {
     }
 
 
+    @GetMapping()
+    public ResponseEntity<List<Futbolista>> getFutbolistas() {
+        List<Futbolista> futbolistas = service.findAll();
+        return ResponseEntity.status(HttpStatus.OK).body(futbolistas);
+    }
+
+
     @GetMapping("/page/{page}")
     public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
