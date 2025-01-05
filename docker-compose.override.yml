@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - ./src:/app/src                # Monta el código fuente
+      - ./pom.xml:/app/pom.xml        # Monta el archivo de configuración de Maven
+      - ./.mvn:/app/.mvn              # Monta los archivos de configuración de Maven
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev    # Activar un perfil de desarrollo
+    command: ./mvnw spring-boot:run   # Ejecutar la aplicación en modo desarrollo
+    networks:
+      - spring
