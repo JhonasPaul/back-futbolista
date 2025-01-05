@@ -1,18 +1,16 @@
 version: "3.9"
 services:
   app:
-    image: futbolistas # Usará la imagen que se genere
-    container_name: servicio-futbolistas
+    build:
+      context: .
+      args:
+        ENVIRONMENT: prod # Aquí indicamos el entorno de producción
     ports:
       - "8001:8080"
     depends_on:
       - db
     networks:
       - spring
-    build:
-      context: .
-      args:
-        ENVIRONMENT: dev # Aquí indicamos el entorno de desarrollo
 
   db:
     image: mysql:8
