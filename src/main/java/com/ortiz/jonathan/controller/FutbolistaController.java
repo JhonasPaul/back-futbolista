@@ -34,7 +34,7 @@ public class FutbolistaController {
     @GetMapping("/page/{page}")
     public ResponseEntity<Page<Futbolista>> getFutbolistas(@PathVariable Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
-        return new ResponseEntity<>(service.paginate(pageable),HttpStatus.OK);
+        return new ResponseEntity<>(service.paginate(pageable), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -44,7 +44,14 @@ public class FutbolistaController {
 
     @DeleteMapping("/{id}")
     public void deleteFutbolista(@PathVariable Long id) {
-      service.eliminarFutbolista(id);
+        service.eliminarFutbolista(id);
+    }
+
+
+    @PostMapping
+    public ResponseEntity<Futbolista> saveFutbolista(@RequestBody Futbolista futbolista) {
+        Futbolista savedFutbolista = service.guardarFutbolista(futbolista);
+        return new ResponseEntity<>(savedFutbolista, HttpStatus.CREATED);
     }
 }
 

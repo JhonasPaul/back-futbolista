@@ -31,4 +31,9 @@ public class FutbolistaServiceImpl implements   FutbolsitaService{
 	public void eliminarFutbolista(Long id) {
 		futbolistaRepository.deleteById(id);
 	}
+
+	@Override
+	public Futbolista guardarFutbolista(Futbolista futbolista) {
+		return futbolistaRepository.save(futbolista);
+	}
 }

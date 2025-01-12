@@ -22,5 +22,9 @@ public class Futbolista extends Persona {
     public Futbolista() {
     }
 
-
+    public Futbolista(String nombres, String apelidos, String fecha_nacimiento,String caracteristicas, Posicion posicion) {
+        super(nombres, apelidos, fecha_nacimiento);
+        this.caracteristicas = caracteristicas;
+        this.posicion = posicion;
+    }
 }

@@ -1,0 +1,9 @@
+services:
+  app:
+    volumes:
+      - /home/jonathan/Escritorio/infrastructure/back-futbolista:/app:delegated
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_APP_PORT=${SPRING_APP_PORT}
+    ports:
+     - ${SPRING_APP_PORT}:8080

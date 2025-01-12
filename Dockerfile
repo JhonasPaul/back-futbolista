@@ -1,35 +1,30 @@
 # Usamos una imagen base de Java 17 y Maven para construir el proyecto
-FROM alpine/java:17-jdk AS builder
+FROM maven:3.8.8-amazoncorretto-17 AS builder
 
 # Establecemos el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiamos el archivo pom.xml y los archivos fuente del proyecto
+# Copiar solo los archivos necesarios
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copiar el código fuente y construir
+COPY mvnw ./
 COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY pom.xml ./
 COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Ejecutamos Maven para construir la aplicación y generar el JAR
-RUN ./mvnw clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target/
-RUN ./mvnw clean package -DskipTests
-
-# Copiamos el archivo JAR de la aplicación en el contenedor
-COPY ./target/back-futbolistas-0.0.1-SNAPSHOT.jar .
-
-# Copiamos el script wait-for-it.sh al contenedor
-COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
-
-
-FROM alpine/java:17-jdk
+# Imagen final de ejecución
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 
-# Copiamos el archivo JAR desde el contenedor de construcción
-COPY --from=builder /app/target/back-futbolistas-0.0.1-SNAPSHOT.jar .
+# Instalar nc (Netcat) para que wait-for-it.sh funcione
+RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
-# Copiamos el script wait-for-it.sh desde el contenedor de construcción
-COPY --from=builder /wait-for-it.sh /wait-for-it.sh
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
 EXPOSE 8080
 
-# Cambiar ENTRYPOINT para usar el shell y ejecutar wait-for-it.sh
-ENTRYPOINT ["sh", "/wait-for-it.sh", "db:3306", "--", "java", "-jar", "back-futbolistas-0.0.1-SNAPSHOT.jar"]
+# Ejecutar directamente el código fuente, no el JAR
+CMD ["sh", "/wait-for-it.sh", "db", "3306", "-c", "mvn spring-boot:run -Dspring-boot.run.profiles=dev"]

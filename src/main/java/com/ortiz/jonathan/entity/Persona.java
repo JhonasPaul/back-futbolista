@@ -13,4 +13,12 @@ public class Persona extends BaseId{
     protected String apellidos;
     protected String fechaNacimiento;
 
+    public Persona() {
+    }
+
+    public Persona(String nombres, String apellidos, String fechaNacimiento) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+    }
 }

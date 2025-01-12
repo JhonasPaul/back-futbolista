@@ -18,4 +18,7 @@ public class Posicion extends BaseId{
     public Posicion() {
     }
 
+    public Posicion(Long id) {
+        this.id = id;
+    }
 }

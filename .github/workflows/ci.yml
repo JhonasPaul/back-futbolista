@@ -1,0 +1,61 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - docker
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Clona el repositorio
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # lona el repositorio
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Construye el artefacto JAR
+      - name: Build JAR
+        run: |
+          mvn clean package -DskipTests
+
+      # Ejecuta migraciones de Flyway
+      - name: Run Flyway migrations
+        run: |
+          docker run --rm \
+            -v $(pwd)/sql:/flyway/sql \
+            -e FLYWAY_URL=jjdbc:mysql://mysql8:3306/futbolistas_db \
+            -e FLYWAY_USER=root \
+            -e FLYWAY_PASSWORD=45549813O \
+            flyway/flyway migrate
+
+      # Construye imagen de producción
+      - name: Build Docker image for production
+        run: |
+          docker build -t futbolistas:latest .
+
+      # Publica la imagen en Docker Hub
+      - name: Push Docker image to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - run: |
+          docker tag futbolistas:latest jhonaspaul/futbolistas:latest
+          docker push jhonaspaul/futbolistas:latest
+
+      # Despliega en producción
+#      - name: Deploy to production
+#        run: |
+#          ssh -o StrictHostKeyChecking=no user@your-server-ip << 'EOF'
+#          docker pull jhonaspaul/futbolistas:latest
+#          cd /path/to/production/
+#          docker-compose -f docker-compose.prod.yml up -d
+#          EOF
