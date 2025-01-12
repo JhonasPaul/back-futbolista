@@ -1,6 +1,6 @@
 services:
   app:
-    image: jhonaspaul/futbolistas:latest
+    image: futbolistas:latest
     container_name: servicio-futbolistas
     restart: always
     environment:

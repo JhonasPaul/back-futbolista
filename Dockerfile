@@ -19,6 +19,9 @@ RUN mvn clean package -DskipTests
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 
+# Instalar Maven
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+
 # Instalar nc (Netcat) para que wait-for-it.sh funcione
 RUN apt-get update && apt-get install -y netcat && rm -rf /var/lib/apt/lists/*
 
@@ -26,5 +29,5 @@ COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 EXPOSE 8080
 
-# Ejecutar directamente el código fuente, no el JAR
-CMD ["sh", "/wait-for-it.sh", "db", "3306", "-c", "mvn spring-boot:run -Dspring-boot.run.profiles=dev"]
+CMD ["sh", "-c", "/wait-for-it.sh db 3306 -- mvn spring-boot:run -Dspring-boot.run.profiles=dev"]
+

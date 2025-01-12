@@ -1,11 +1,10 @@
-
 services:
   app:
     build:
       context: /home/jonathan/Escritorio/infrastructure/back-futbolista
     image: futbolistas
     container_name: servicio-futbolistas
-    restart: no
+    restart: "no"
     environment:
       - SPRING_APP_PORT=${SPRING_APP_PORT}
       - SPRING_PROFILES_ACTIVE=dev
