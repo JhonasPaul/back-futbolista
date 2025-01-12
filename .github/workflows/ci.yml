@@ -31,7 +31,7 @@ jobs:
         run: |
           docker run --rm \
             -v $(pwd)/sql:/flyway/sql \
-            -e FLYWAY_URL=jjdbc:mysql://mysql8:3306/futbolistas_db \
+            -e FLYWAY_URL=jdbc:mysql://mysql8:3306/futbolistas_db \
             -e FLYWAY_USER=root \
             -e FLYWAY_PASSWORD=45549813O \
             flyway/flyway migrate
