@@ -15,7 +15,7 @@ jobs:
       - name: Checkout database repository
         uses: actions/checkout@v3
         with:
-          repository: 'jhonasPaul/https://github.com/JhonasPaul/mysql.git'  # Reemplaza con tu repositorio de la base de datos
+          repository: 'JhonasPaul/mysql'  # Reemplaza con tu repositorio de la base de datos
           token: ${{ secrets.GITHUB_TOKEN }}
           path: ./mysql
 
