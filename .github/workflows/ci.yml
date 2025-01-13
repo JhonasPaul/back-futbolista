@@ -10,15 +10,39 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-
       - name: Checkout database repository
         uses: actions/checkout@v3
         with:
           repository: 'JhonasPaul/mysql'  # Reemplaza con tu repositorio de la base de datos
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: ./mysql
+          path: mysql
 
+      - name: Set up Docker Compose
+        run: |
+          cd mysql
+          docker-compose -f docker-compose.yml up -d
+
+      - name: Install dockerize
+        run: |
+          wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
+          tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
+          sudo mv dockerize /usr/local/bin/
+
+
+      - name: Wait for MySQL to be ready
+        run: |
+          dockerize -wait tcp://mysql8:3306 -timeout 60s
+
+
+      # Ejecuta migraciones de Flyway
+      - name: Run Flyway migrations
+        run: |
+          docker run --rm \
+            -v $(pwd)/sql:/flyway/sql \
+            -e FLYWAY_URL=jdbc:mysql://mysql8:3306/futbolistas_db \
+            -e FLYWAY_USER=root \
+            -e FLYWAY_PASSWORD=45549813O \
+            flyway/flyway migrate
 
           # Clona el repositorio
       - name: Checkout code
@@ -36,33 +60,7 @@ jobs:
         run: |
           mvn clean package -DskipTests
 
-      - name: Set up Docker Compose
-        run: |
-          cd mysql
-          docker-compose -f docker-compose.yml up -d
-
-      - name: Install dockerize
-        run: |
-          wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
-          tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
-          sudo mv dockerize /usr/local/bin/
-    
-    
-      - name: Wait for MySQL to be ready
-        run: |
-          dockerize -wait tcp://mysql8:3306 -timeout 60s
-    
-    
-    
-      # Ejecuta migraciones de Flyway
-      - name: Run Flyway migrations
-        run: |
-          docker run --rm \
-            -v $(pwd)/sql:/flyway/sql \
-            -e FLYWAY_URL=jdbc:mysql://mysql8:3306/futbolistas_db \
-            -e FLYWAY_USER=root \
-            -e FLYWAY_PASSWORD=45549813O \
-            flyway/flyway migrate
+      
 
       # Construye imagen de producción
       - name: Build Docker image for production
