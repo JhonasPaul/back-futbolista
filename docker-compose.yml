@@ -1,23 +1,18 @@
+version: '3.8'
+
 services:
   app:
     build:
-      context: /home/jonathan/Escritorio/infrastructure/back-futbolista
+      context: .
     image: futbolistas
     container_name: servicio-futbolistas
-    restart: "no"
+    restart: "no"  # No se reinicia en desarrollo
     environment:
       - SPRING_APP_PORT=${SPRING_APP_PORT}
-      - SPRING_PROFILES_ACTIVE=dev
-      - JAVA_OPTS=-Dspring.devtools.restart.enabled=true
-    command: >
-      sh -c "/wait-for-it.sh db 3306 -- ./mvnw spring-boot:run -Dspring-boot.run.profiles=dev"
     ports:
       - ${SPRING_APP_PORT}:8080
     networks:
       - spring
-    volumes:
-      - ~/.m2:/root/.m2:delegated
-      - /home/jonathan/Escritorio/infrastructure/back-futbolista:/app:delegated
 networks:
   spring:
     external: true

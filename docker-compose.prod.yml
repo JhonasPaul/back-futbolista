@@ -1,11 +1,13 @@
 services:
   app:
+    build:
+     target: prod
     image: futbolistas:latest
     container_name: servicio-futbolistas
     restart: always
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-      - SPRING_APP_PORT=8080
+      - SPRING_APP_PORT=${SPRING_APP_PORT:-8080}
     ports:
       - ${SPRING_APP_PORT}:8080
     networks:
@@ -14,5 +16,3 @@ services:
 networks:
   spring:
     external: true
-
-
