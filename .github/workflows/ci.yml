@@ -28,7 +28,7 @@ jobs:
 
       - name: Set up Docker Compose
         run: |
-          cd /mysql
+          cd mysql
           docker-compose -f docker-compose.yml up -d
 
       - name: Install dockerize
