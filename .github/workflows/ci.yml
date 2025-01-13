@@ -26,12 +26,17 @@ jobs:
         run: |
           mvn clean package -DskipTests
 
+      - name: Install dockerize
+        run: |
+          wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz
+          tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
+          sudo mv dockerize /usr/local/bin/
+
       - name: Wait for MySQL to be ready
         run: |
-          wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
-          chmod +x wait-for-it.sh
-          ./wait-for-it.sh mysql8:3306 --timeout=60 --strict -- echo "MySQL is up"
-     
+          dockerize -wait tcp://mysql8:3306 -timeout 60s
+      
+      
 
       # Ejecuta migraciones de Flyway
       - name: Run Flyway migrations
