@@ -30,8 +30,8 @@ jobs:
         run: |
           wget https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
           chmod +x wait-for-it.sh
-          ./wait-for-it.sh mysql8:3306"
-      
+          ./wait-for-it.sh mysql8:3306 --timeout=60 --strict -- echo "MySQL is up"
+     
 
       # Ejecuta migraciones de Flyway
       - name: Run Flyway migrations
