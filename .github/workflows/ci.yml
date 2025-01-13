@@ -17,7 +17,7 @@ jobs:
 
       - name: Create Docker network
         run: |
-          docker network create spring
+          docker network create spring || true
 
       - name: Checkout database repository
         uses: actions/checkout@v3
