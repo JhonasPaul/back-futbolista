@@ -38,9 +38,9 @@ jobs:
           tar -xzvf dockerize-linux-amd64-v0.6.1.tar.gz
           sudo mv dockerize /usr/local/bin/
 
-      - name: Wait for MySQL to be ready
-        run: |
-          dockerize -wait tcp://mysql8:3306 -timeout 120s
+#      - name: Wait for MySQL to be ready
+#        run: |
+#          dockerize -wait tcp://mysql8:3306 -timeout 120s
 
       - name: Run Flyway migrations
         run: |
