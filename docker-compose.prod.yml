@@ -2,7 +2,7 @@ services:
   app:
     build:
      target: prod
-    image: futbolistas:latest
+    image: jhonaspaul/futbolistas:latest
     container_name: servicio-futbolistas
     restart: always
     environment:
