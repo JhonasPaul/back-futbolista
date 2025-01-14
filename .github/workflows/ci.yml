@@ -21,6 +21,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: mysql
 
+      - name: install mysql client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y  mysql-client 
+
       - name: Set up Docker Compose
         run: |
           sudo apt-get update
@@ -42,10 +47,7 @@ jobs:
         run: |
           dockerize -wait tcp://mysql8:3306 -timeout 120s
 
-      - name: install mysql client
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y  mysql-client 
+      
 
       - name: Run Flyway migrations
         run: |
