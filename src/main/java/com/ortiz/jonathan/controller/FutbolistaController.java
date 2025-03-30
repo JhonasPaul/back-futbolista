@@ -21,7 +21,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("/api/futbolistas")
+@RequestMapping("/api/futbolistass")
 public class FutbolistaController {
 
     private final FutbolsitaService service;
